@@ -1,0 +1,104 @@
+<!-- ===================== INDEX.HTML ===================== --><!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bogobiri Hotel</title>
+<style>
+body{font-family:Arial;margin:0;background:#f7f7f7;}
+header{background:#111;color:#fff;padding:20px;text-align:center;}
+.container{padding:20px;}
+.card{background:#fff;padding:15px;margin:10px 0;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+.btn{display:inline-block;padding:10px 15px;margin:5px;border:none;border-radius:6px;cursor:pointer;text-decoration:none}
+.primary{background:#e67e22;color:#fff;}
+.whatsapp{background:#25D366;color:#fff;}
+.pay{background:#0099ff;color:#fff;}
+.gallery{display:flex;gap:10px;overflow-x:auto}
+.gallery img{width:200px;height:140px;object-fit:cover;border-radius:10px;}
+</style>
+</head>
+<body>
+<header>
+<h1>Bogobiri Hotel</h1>
+<p>Luxury stays in Lagos</p>
+</header><div class="container"><div class="card">
+<h2>Welcome</h2>
+<p>Book your room instantly, pay online or chat with us on WhatsApp.</p>
+<a href="book.html" class="btn primary">Book a Room</a>
+<a href="https://wa.me/2348012345678" class="btn whatsapp">WhatsApp Booking</a>
+</div><div class="card">
+<h2>Room Gallery</h2>
+<div class="gallery">
+<img src="https://via.placeholder.com/300x200" />
+<img src="https://via.placeholder.com/300x200" />
+<img src="https://via.placeholder.com/300x200" />
+</div>
+</div><div class="card">
+<h2>Admin</h2>
+<a href="admin.html" class="btn pay">Go to Admin Dashboard</a>
+</div></div>
+</body>
+</html><!-- ===================== BOOK.HTML ===================== --><!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Room</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:0;padding:20px;}
+.box{background:#fff;padding:20px;border-radius:10px;max-width:500px;margin:auto;}
+input,select{width:100%;padding:10px;margin:8px 0;}
+button{padding:10px;width:100%;border:none;border-radius:6px;cursor:pointer}
+.pay{background:#0099ff;color:#fff;}
+.whatsapp{background:#25D366;color:#fff;margin-top:10px;}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>Book a Room</h2><input type="text" id="name" placeholder="Full Name" />
+<input type="date" id="date" />
+<select id="room">
+<option>Standard Room</option>
+<option>Deluxe Room</option>
+<option>VIP Suite</option>
+</select><button class="pay" onclick="pay()">Pay Now (Paystack/Flutterwave)</button> <button class="whatsapp" onclick="whatsappBook()">Book via WhatsApp</button>
+
+</div><script>
+function whatsappBook(){
+let name=document.getElementById('name').value;
+let room=document.getElementById('room').value;
+let date=document.getElementById('date').value;
+let msg=`Hello, I want to book ${room} for ${date}. My name is ${name}`;
+window.open(`https://wa.me/2348012345678?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+function pay(){
+alert("Payment integration placeholder. Connect Paystack or Flutterwave API here.");
+}
+</script></body>
+</html><!-- ===================== ADMIN.HTML ===================== --><!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard</title>
+<style>
+body{font-family:Arial;background:#111;color:#fff;margin:0;padding:20px;}
+.box{background:#222;padding:15px;border-radius:10px;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+th,td{border:1px solid #444;padding:10px;text-align:left;}
+</style>
+</head>
+<body>
+<h2>Admin Dashboard</h2><div class="box">
+<h3>Bookings</h3>
+<table>
+<tr><th>Name</th><th>Room</th><th>Date</th></tr>
+<tbody id="data"></tbody>
+</table>
+</div><script>
+let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+let table=document.getElementById('data');
+bookings.forEach(b=>{
+let row=`<tr><td>${b.name}</td><td>${b.room}</td><td>${b.date}</td></tr>`;
+table.innerHTML+=row;
+});
+</script></body>
+</html>
